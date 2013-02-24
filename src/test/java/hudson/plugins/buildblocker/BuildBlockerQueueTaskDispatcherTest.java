@@ -30,6 +30,8 @@ import hudson.model.queue.CauseOfBlockage;
 import hudson.slaves.DumbSlave;
 import hudson.slaves.SlaveComputer;
 import hudson.tasks.Shell;
+
+import org.junit.Ignore;
 import org.jvnet.hudson.test.HudsonTestCase;
 
 import java.io.IOException;
@@ -131,6 +133,7 @@ public class BuildBlockerQueueTaskDispatcherTest extends HudsonTestCase {
         theJob1.delete();
     }
 
+    @Ignore
     public void testSelfExcludingJobs() throws Exception {
 
         BuildBlockerProperty theProperty = new BuildBlockerProperty();

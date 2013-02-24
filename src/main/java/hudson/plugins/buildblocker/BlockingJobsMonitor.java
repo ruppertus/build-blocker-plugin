@@ -27,6 +27,7 @@ package hudson.plugins.buildblocker;
 import hudson.model.Computer;
 import hudson.model.Executor;
 import hudson.model.Queue;
+import hudson.model.Queue.Item;
 import hudson.model.queue.SubTask;
 import jenkins.model.Jenkins;
 import org.apache.commons.lang.StringUtils;
@@ -90,24 +91,20 @@ public class BlockingJobsMonitor {
             }
         }
 
-        /**
-         * check the list of items that have
-         * already been approved for building
-         * (but haven't actually started yet)
-         */
-        List<Queue.BuildableItem> buildableItems
-            = Jenkins.getInstance().getQueue().getBuildableItems();
-
-        for (Queue.BuildableItem buildableItem : buildableItems) {
-        	if(item != buildableItem) {
-	            for (String blockingJob : this.blockingJobs) {
-	                if(buildableItem.task.getFullDisplayName().matches(blockingJob)) {
-	                    return buildableItem.task;
-	                }
-	            }
-        	}
-        }
-
+        Item[] queueItems = Jenkins.getInstance().getQueue().getItems();
+		for (Queue.Item queueItem : queueItems) {
+			if (item != queueItem) {
+				for (String blockingJob : this.blockingJobs) {
+					String buildableItemTaskName = queueItem.task.getFullDisplayName();
+					if (buildableItemTaskName.matches(blockingJob)) {
+						if (buildableItemTaskName.equals(item.task.getFullDisplayName()) && queueItem.id > item.id) {
+							return null;
+						}
+						return queueItem.task;
+					}
+				}
+			}
+		}
         return null;
     }
 }

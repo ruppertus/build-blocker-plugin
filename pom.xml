@@ -33,9 +33,9 @@
   </parent>
 
   <groupId>org.jenkins-ci.plugins</groupId>
-  <artifactId>build-blocker-plugin</artifactId>
-  <name>Build Blocker Plugin</name>
-  <version>1.4-SNAPSHOT</version>
+  <artifactId>extended-build-blocker-plugin</artifactId>
+  <name>Extended Build Blocker Plugin</name>
+  <version>1.4.1</version>
   <packaging>hpi</packaging>
   <url>https://wiki.jenkins-ci.org/display/JENKINS/Build+Blocker+Plugin</url>
 
@@ -52,6 +52,10 @@
       <id>ffromm</id>
       <name>Frederik Fromm</name>
       <email>frederik.fromm@gmail.com</email>
+    </developer>
+    <developer>
+      <id>ruppertus</id>
+      <name>Robert Gonciarz</name>
     </developer>
   </developers>
 
